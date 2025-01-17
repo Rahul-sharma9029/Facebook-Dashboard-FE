@@ -18,7 +18,6 @@ dist/
 
 # Test directories
 coverage/
-
 # Environment variables
 .env
 .env.local
