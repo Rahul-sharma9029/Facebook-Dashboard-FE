@@ -1,0 +1,308 @@
+/* AutomatePopup.css */
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup Container */
+.popup-container {
+  background-color: #fff;
+  width: 90%;
+  max-width: 900px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: 'Arial', sans-serif;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Title */
+.popup-container h3 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Form Layout */
+.form-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+  display: block;
+}
+
+/* Input Fields */
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+/* Radio Button Styling */
+label input[type="radio"] {
+  margin-right: 5px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.radio-group label {
+  font-weight: normal;
+}
+
+/* Error & Success Messages */
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Button Group */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:nth-child(2) {
+  background-color: #f44336;
+}
+
+button:nth-child(2):hover {
+  background-color: #e53935;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .popup-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  input[type="text"],
+  select {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .form-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  button:nth-child(2) {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .popup-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  input[type="text"],
+  select {
+    padding: 7px;
+    font-size: 12px;
+  }
+
+  .radio-group {
+    flex-direction: column;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* CSS to style the slider in AutomatePopup */
+
+/* Slider container */
+.slider-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* The switch - the container */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+/* The slider */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0cbf57;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: rgb(254, 254, 254);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Checked state */
+input:checked + .slider {
+  background-color: #d80f0f;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+.popup-container {
+  position: relative; /* Needed for absolute positioning of the slider */
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  /* max-width: 500px; */
+  margin: auto;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Ensure the overlay covers the whole screen */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* Ensure it is on top */
+}
+
+/* Loader text styles */
+.loading-text {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+.loading {
+  color: #007bff;
+  font-size: 2rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.response {
+  color: #28a745;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
