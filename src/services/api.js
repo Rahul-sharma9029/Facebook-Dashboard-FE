@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://automation-dashboard-c6dcf4fre4gmgscu.eastus-01.azurewebsites.net";
 
 
 export const loginUser = async (userAccessToken) => {
