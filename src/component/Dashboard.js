@@ -7,7 +7,7 @@ import "./Dashboard.css"; // Import CSS for styling
 const Dashboard = ({ accessToken }) => {
   const [isLoading, setIsLoading] = useState(false); // Loader state for page loading
   const [popupLoading, setPopupLoading] = useState(false); // Loader state for popup loading
-  // const [pages, setPages] = useState([]);
+  const [pages, setPages] = useState([]);
   const [pageDetails, setPageDetails] = useState([]);
   const [selectedPage, setSelectedPage] = useState(null); // State for the selected page to show reels/videos
   const [automationPage, setAutomationPage] = useState(null); // State for the page selected for automation
@@ -18,7 +18,7 @@ const Dashboard = ({ accessToken }) => {
       try {
         setIsLoading(true);
         const data = await fetchPages(accessToken);
-        const pages = data.pages || [];
+        const pagesData = data.pages || [];
         setPages(pages);
 
         const detailsPromises = pages.map((page) =>
