@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://automation-dashboard-c6dcf4fre4gmgscu.eastus-01.azurewebsites.net";
-
+// const BASE_URL = "https://automation-dashboard-c6dcf4fre4gmgscu.eastus-01.azurewebsites.net";
+const BASE_URL = "http://localhost:8080";
 
 export const loginUser = async (userAccessToken) => {
     debugger
