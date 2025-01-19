@@ -19,9 +19,9 @@ const Dashboard = ({ accessToken }) => {
         setIsLoading(true);
         const data = await fetchPages(accessToken);
         const pages = data.pages || [];
-        // setPages(pages);
+        setPages(pages);
 
-        const detailsPromises = pages.map((page) =>
+        const detailsPromises = pagesData.map((page) =>
           fetchPageReels(page.id, page.access_token)
             .then((details) => ({ ...page, details }))
             .catch(() => ({ ...page, error: "Error fetching reels data" }))
