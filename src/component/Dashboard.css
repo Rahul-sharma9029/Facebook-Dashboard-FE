@@ -227,3 +227,34 @@ h2 {
   font-size: 2rem;
   font-weight: bold;
 }
+
+.page-table th {
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+.page-table th span {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.page-table th:hover {
+  background-color: #3a9c3d;
+}
+
+.page-table td,
+.page-table th {
+  text-align: center;
+}
+
+.page-table tr:hover {
+  background-color: #e9fbe9;
+}
+
+.action-btn {
+  background-color: #007bff;
+  color: #fff;
+}
