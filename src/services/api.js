@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const BASE_URL = "https://automation-dashboard-c6dcf4fre4gmgscu.eastus-01.azurewebsites.net";
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://essentials-dashboard-be-fz9xi7-456e25-46-202-152-148.traefik.me";
+// const BASE_URL = "http://localhost:8080";
 
 export const loginUser = async (userAccessToken) => {
     debugger
