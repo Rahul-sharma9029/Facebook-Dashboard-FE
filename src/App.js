@@ -18,7 +18,7 @@ const App = () => {
       ) : (
         <>
           <h1>Welcome, {user.name}</h1>
-          <Dashboard accessToken={accessToken} />
+          <Dashboard accessToken={accessToken} userName={user.name}/>
         </>
       )}
     </div>

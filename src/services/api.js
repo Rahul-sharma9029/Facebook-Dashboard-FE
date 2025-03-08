@@ -69,18 +69,33 @@ export const fetchPageVideos = async (pageId, pageAccessToken) => {
   }
 };
 
-
-export const createMapping = async (pageName, channelId, accessToken) => {
+export const createMapping = async (data) => {
   try {
+    const requestData = {
+      pageName: data.pageName || "",
+      channelId: data.channelId || "",
+      accessToken: data.accessToken || "",
+      tags: data.tags || "",
+      overlay: data.overlay ?? false,
+      source: data.source || "youtube",
+      reactionPlaylistId: data.reactionPlaylistId || "",
+      owner: data.owner || "Rohan",
+      reel: data.reel ?? true,
+      post: data.post ?? true,
+      musicPlay: data.musicPlay ?? false,
+      musicVideoLink: data.musicVideoLink || "Default Music Link",
+    };
+
+    console.log("API Request Data:", requestData); // Log request data
+
     const response = await fetch(`${BASE_URL}/api/automation/create-mapping`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ pageName, channelId, accessToken }),
+      body: JSON.stringify(requestData),
     });
-    console.log(response);
-    
+
     if (!response.ok) {
       throw new Error("Failed to create mapping");
     }
@@ -91,6 +106,8 @@ export const createMapping = async (pageName, channelId, accessToken) => {
     throw error;
   }
 };
+
+
 
 
 

@@ -5,7 +5,7 @@ import ReelPopup from "./ReelPopup";
 import AutomatePopup from "./AutomatePopup";
 import "./Dashboard.css"; // Import CSS for styling
 
-const Dashboard = ({ accessToken }) => {
+const Dashboard = ({ accessToken, userName  }) => {
   const [isLoading, setIsLoading] = useState(false); // Loader state for page loading
   const [popupLoading, setPopupLoading] = useState(false); // Loader state for popup loading
   const [pageDetails, setPageDetails] = useState([]);
@@ -61,6 +61,7 @@ const Dashboard = ({ accessToken }) => {
   };
 
   const openAutomationPopup = (page) => {
+    console.log("owner name 2 on dashboard : ",userName);
     setAutomationPage(page);
   };
 
@@ -76,7 +77,14 @@ const Dashboard = ({ accessToken }) => {
     setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
     setSortBy(sortKey);
   };
-
+  const formatViews = (views) => {
+    if (!views) return "N/A";
+    const num = parseInt(views, 10);
+    if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B";
+    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
+    if (num >= 1_000) return (num / 1_000).toFixed(1) + "K";
+    return num.toString();
+  };
   const sortData = (data) => {
     if (!sortBy) return data;
 
@@ -151,9 +159,9 @@ const Dashboard = ({ accessToken }) => {
           <table className="page-table">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Page ID</th>
-                <th onClick={() => handleSort("name")}>
+              <th rowSpan="2">#</th>
+                <th rowSpan="2">Page ID</th>
+                <th rowSpan="2" onClick={() => handleSort("name")}>
                   Page Name {sortBy === "name" && (
                     <span className="sort-icon">{sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />}</span>
                   )}
@@ -166,12 +174,9 @@ const Dashboard = ({ accessToken }) => {
                 <th colSpan="3" className="reel-column">
                   Most Viewed Video
                 </th>
-                <th>Actions</th>
+                <th rowSpan="2">Actions</th>
               </tr>
               <tr>
-                <th></th>
-                <th></th>
-                <th></th>
                 <th className="reel-column">Reel Title</th>
                 <th
                   className="reel-column"
@@ -206,7 +211,6 @@ const Dashboard = ({ accessToken }) => {
                     <span className="sort-icon">{sortOrder === "asc" ? <FaSortUp /> : <FaSortDown />}</span>
                   )}
                 </th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -221,7 +225,7 @@ const Dashboard = ({ accessToken }) => {
                         ? truncateTitle(page.details.mostRecentReel.title)
                         : "No title"}
                     </td>
-                    <td>{page.details?.mostRecentReel?.views || "N/A"}</td>
+                    <td>{formatViews(page.details?.mostRecentReel?.views) || "N/A"}</td>
                     <td>
                       {page.details?.mostRecentReel?.created_time
                         ? new Date(page.details.mostRecentReel.created_time).toLocaleString()
@@ -232,7 +236,7 @@ const Dashboard = ({ accessToken }) => {
                         ? truncateTitle(page.details.mostViewedReel.title)
                         : "No title"}
                     </td>
-                    <td>{page.details?.mostViewedReel?.views || "N/A"}</td>
+                    <td>{formatViews(page.details?.mostViewedReel?.views) || "N/A"}</td>
                     <td>
                       {page.details?.mostViewedReel?.created_time
                         ? new Date(page.details.mostViewedReel.created_time).toLocaleString()
@@ -249,7 +253,7 @@ const Dashboard = ({ accessToken }) => {
                         </button>
                         <button
                           className="action-btn"
-                          onClick={() => openAutomationPopup(page)}
+                          onClick={() => openAutomationPopup(page,userName)}
                         >
                           Automate
                         </button>
@@ -273,7 +277,7 @@ const Dashboard = ({ accessToken }) => {
       )}
 
       {automationPage && (
-        <AutomatePopup pageDetails={automationPage} onClose={closeAutomationPopup} />
+        <AutomatePopup pageDetails={automationPage} ownerName={userName} onClose={closeAutomationPopup} />
       )}
 
       {error && <p className="error">{error}</p>}

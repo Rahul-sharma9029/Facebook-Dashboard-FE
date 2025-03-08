@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./AutomatePopup.css";
 import { createMapping } from "../services/api";
 
-const AutomatePopup = ({ pageDetails, onClose }) => {
+const AutomatePopup = ({ pageDetails, ownerName, onClose }) => {
   const [pageName, setPageName] = useState("");
   const [channelId, setChannelId] = useState("");
   const [accessToken, setAccessToken] = useState("");
@@ -10,11 +10,11 @@ const AutomatePopup = ({ pageDetails, onClose }) => {
   const [overlay, setOverlay] = useState(false);
   const [source, setSource] = useState("youtube");
   const [reactionPlaylistId, setReactionPlaylistId] = useState("");
-  const [owner, setOwner] = useState("Rohan");
+  const [owner, setOwner] = useState(ownerName);
   const [reel, setReel] = useState(true);
   const [post, setPost] = useState(true);
-  const [musicPlay, setMusicPlay] = useState(false);
-  const [musicVideoLink, setMusicVideoLink] = useState("");
+  const [musicPlay, setMusicPlay] = useState(true);
+  const [musicVideoLink, setMusicVideoLink] = useState("https://youtu.be/-gfsI06Cs28?si=tJFXtaM14L9_D250");
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -41,22 +41,25 @@ const AutomatePopup = ({ pageDetails, onClose }) => {
       setLoading(false); // Stop the loader
       return;
     }
+    const requestData = {
+      pageName,
+      channelId,
+      accessToken,
+      tags,
+      overlay,
+      source,
+      reactionPlaylistId,
+      owner,
+      reel,
+      post,
+      musicPlay,
+      musicVideoLink,
+    };
 
     try {
-      const response = await createMapping(
-        pageName,
-        channelId,
-        accessToken,
-        tags,
-        overlay,
-        source,
-        reactionPlaylistId,
-        owner,
-        reel,
-        post,
-        musicPlay,
-        musicVideoLink
-      );
+        
+      const response = await createMapping(requestData);
+
       setResponseMessage(response.message || "Mapping created successfully!"); // Display API response
       setSuccess("Mapping created successfully!");
     } catch (err) {
@@ -110,6 +113,32 @@ const AutomatePopup = ({ pageDetails, onClose }) => {
             onChange={(e) => setChannelId(e.target.value)}
           />
         </label>
+
+        <label>
+              Music Play:
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    name="musicPlay"
+                    value={true}
+                    checked={musicPlay === true}
+                    onChange={() => setMusicPlay(true)}
+                  />{" "}
+                  Yes
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="musicPlay"
+                    value={false}
+                    checked={musicPlay === false}
+                    onChange={() => setMusicPlay(false)}
+                  />{" "}
+                  No
+                </label>
+              </div>
+            </label>
 
         {showDefaults && (
           <>
@@ -228,7 +257,7 @@ const AutomatePopup = ({ pageDetails, onClose }) => {
               </div>
             </label>
 
-            <label>
+            {/* <label>
               Music Play:
               <div>
                 <label>
@@ -252,7 +281,7 @@ const AutomatePopup = ({ pageDetails, onClose }) => {
                   No
                 </label>
               </div>
-            </label>
+            </label> */}
 
             <label>
               Music Video Link:
