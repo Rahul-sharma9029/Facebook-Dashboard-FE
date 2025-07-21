@@ -11,9 +11,9 @@ const AutomatePopup = ({ pageDetails, ownerName, onClose }) => {
   const [source, setSource] = useState("youtube");
   const [reactionPlaylistId, setReactionPlaylistId] = useState("");
   const [owner, setOwner] = useState(ownerName);
-  const [reel, setReel] = useState(true);
+  const [reel, setReel] = useState(false);
   const [post, setPost] = useState(true);
-  const [musicPlay, setMusicPlay] = useState(true);
+  const [musicPlay, setMusicPlay] = useState(false);
   const [musicVideoLink, setMusicVideoLink] = useState("https://youtu.be/-gfsI06Cs28?si=tJFXtaM14L9_D250");
 
   const [error, setError] = useState("");
@@ -57,7 +57,7 @@ const AutomatePopup = ({ pageDetails, ownerName, onClose }) => {
     };
 
     try {
-        
+
       const response = await createMapping(requestData);
 
       setResponseMessage(response.message || "Mapping created successfully!"); // Display API response
@@ -115,30 +115,41 @@ const AutomatePopup = ({ pageDetails, ownerName, onClose }) => {
         </label>
 
         <label>
-              Music Play:
-              <div>
-                <label>
-                  <input
-                    type="radio"
-                    name="musicPlay"
-                    value={true}
-                    checked={musicPlay === true}
-                    onChange={() => setMusicPlay(true)}
-                  />{" "}
-                  Yes
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="musicPlay"
-                    value={false}
-                    checked={musicPlay === false}
-                    onChange={() => setMusicPlay(false)}
-                  />{" "}
-                  No
-                </label>
-              </div>
+          Music Play:
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="musicPlay"
+                value={true}
+                checked={musicPlay === true}
+                onChange={() => setMusicPlay(true)}
+              />{" "}
+              Yes
             </label>
+            <label>
+              <input
+                type="radio"
+                name="musicPlay"
+                value={false}
+                checked={musicPlay === false}
+                onChange={() => setMusicPlay(false)}
+              />{" "}
+              No
+            </label>
+          </div>
+        </label>
+
+        <label>
+          Source:
+          <select
+            value={source}
+            onChange={(e) => setSource(e.target.value)}
+          >
+            <option value="youtube">YouTube</option>
+            <option value="instagram">Instagram</option>
+          </select>
+        </label>
 
         {showDefaults && (
           <>
@@ -175,16 +186,6 @@ const AutomatePopup = ({ pageDetails, ownerName, onClose }) => {
                   No
                 </label>
               </div>
-            </label>
-
-            <label>
-              Source:
-              <select
-                value={source}
-                onChange={(e) => setSource(e.target.value)}
-              >
-                <option value="youtube">YouTube</option>
-              </select>
             </label>
 
             <label>
