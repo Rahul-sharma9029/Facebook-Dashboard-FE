@@ -96,3 +96,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## new heatmap
 ## heatmap not working
+
+## contributing to heatmap 29042026 v1.1
+
+## net contribution for heatmap v1.2
