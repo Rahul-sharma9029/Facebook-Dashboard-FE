@@ -100,3 +100,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## contributing to heatmap 29042026 v1.1
 
 ## net contribution for heatmap v1.2
+
+## new commits checkthe heat map sync
+
+## 04062026
